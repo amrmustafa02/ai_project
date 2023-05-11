@@ -1,0 +1,25 @@
+state space = [-,-,-,-,-,-,-]
+              [-,-,-,-,-,-,-]
+              [-,-,-,-,-,-,-]
+              [-,-,-,-,B,R,-]
+- = empty
+R = Red player
+B = Blue player
+
+
+
+
+
+0 -> darw (no one win),1 (Red),2 (Blue)
+int checkWinner(board,) -> checkHorizontal,checkVertical,checkDiagonalX,checkDiagonalY
+0 (no full), 1 (full)
+int checkFull(board) -> check if board is full
+
+
+int checkState()->checkWinner(),checkFull()
+check1 check2
+
+
+
+
+
