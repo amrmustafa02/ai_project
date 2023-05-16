@@ -1,8 +1,8 @@
 stateSpace1 = ["-", "-", "-", "-", "-", "-", "-"], \
              ["-", "-", "-", "-", "-", "-", "-"], \
-             ["-", "-", "-", "-", "B", "-", "-"], \
              ["-", "-", "-", "-", "-", "-", "-"], \
-             ["-", "-", "-", "-", "R", "-", "-"], \
+             ["-", "-", "-", "-", "-", "-", "-"], \
+             ["-", "-", "-", "-", "-", "-", "-"], \
              ["-", "-", "-", "-", "-", "-", "-"], \
              ["-", "-", "-", "-", "-", "-", "-"]
 stateSpace2 = ["B", "B", "B", "B", "-", "-", "-"], \
@@ -29,54 +29,69 @@ def printBoard(board):
         print("]")
 
 
-def checkHorizontal(board):
+def checkHorizontal(board,color):
     h = 0
     for x in range(6):
-        for y in range(4):
-            if board[x][y] == "B" and board[x][y+1] == "B" :
-                return 3
-            if board[x][y] == "R" and board[x][y + 1] == "R" and board[x][y + 2] == "R" and board[x][y + 3] == "R":
-                return 4
-            if board[x][y] == "R" and board[x][y+1] == "R" and board[x][y+2] == "R" and board[x][y+3] == "R":
-                return 4
-    return 0
-
-
-def checkVertical(board):
-    for x in range(3):
         for y in range(7):
-            if board[x][y] == "B" and board[x+1][y] == "B" and board[x+2][y] == "B" and board[x+3][y] == "B":
-                return 3
-            if board[x][y] == "B" and board[x][y + 1] == "B" and board[x][y + 2] == "B":
-                return 3
+            if y < 6:
+                if board[x][y] == color and board[x][y + 1] == color:
+                    h += 1
+            if y < 5:
+                if board[x][y] == color and board[x][y + 1] == color and board[x][y + 2] == color:
+                    h += 100
+            if y < 4:
+                if board[x][y] == color and board[x][y + 1] == color and board[x][y + 2] == color and board[x][y + 3] == color:
+                    h += 1000
+    return h
 
-            if board[x][y] == "R" and board[x+1][y] == "R" and board[x+2][y] == "R" and board[x+3][y] == "R":
-                return 4
-    return 0
 
-
-def checkDiagonalX(board):
+def checkVertical(board, color):
     h = 0
-    for x in range(3):
-        for y in range(4):
-            if board[x][y] == "B" and board[x + 1][y + 1] == "B":
-                h
+    for x in range(6):
+        for y in range(7):
+            if x < 5:
+                if board[x][y] == color and board[x+1][y] == color:
+                    h += 1
+            if x < 4:
+                if board[x][y] == color and board[x+1][y] == color and board[x+2][y] == color:
+                    h += 100
+            if x < 3:
+                if board[x][y] == color and board[x][y + 1] == color and board[x][y + 2] == color and board[x+3][y] == color:
+                    h += 1000
+    return h
 
-            if board[x][y] == "B" and board[x+1][y+1] == "B" and board[x+2][y+2] == "B" and board[x+3][y+3] == "B":
-                return 3
-            if board[x][y] == "R" and board[x+1][y+1] == "R" and board[x+2][y+2] == "R" and board[x+3][y+3] == "R":
-                return 4
-    return 0
+
+def checkDiagonalX(board, color):
+    h = 0
+    for x in range(6):
+        for y in range(7):
+            if x<5 and y<6:
+                if board[x][y] == color and board[x + 1][y + 1] == color:
+                    h += 1
+            if x < 4 and y < 5:
+                if board[x][y] == color and board[x + 1][y + 1] == color and board[x + 2][y + 2] == color:
+                    h += 100
+            if x < 3 and y < 4:
+                if board[x][y] == color and board[x + 1][y + 1] == color and board[x + 2][y + 2] == color and board[x + 3][y + 3] == color:
+                    h += 1000
+    return h
 
 
-def checkDiagonalY(board):
-    for x in range(3):
-        for y in range(6, 2, -1):
-            if board[x][y] == "B" and board[x+1][y-1] == "B" and board[x+2][y-2] == "B" and board[x+3][y-3] == "B":
-                return 3
-            if board[x][y] == "R" and board[x+1][y-1] == "R" and board[x+2][y-2] == "R" and board[x+3][y-3] == "R":
-                return 4
-    return 0
+def checkDiagonalY(board, color):
+    h = 0
+    for x in range(6):
+        for y in range(7, 0, -1):
+            if x < 5 and y < 0:
+                if board[x][y] == color and board[x + 1][y - 1] == color:
+                    h += 1
+            if x < 4 and y < 1:
+                if board[x][y] == color and board[x + 1][y - 1] == color and board[x + 2][y - 2] == color:
+                    h += 100
+
+            if x < 3 and y < 2:
+                if board[x][y] == color and board[x + 1][y - 1] == color and board[x + 2][y - 2] == color and board[x + 3][ y - 3] == color:
+                    h += 1000
+    return h
 
 
 def checkFull(board):
@@ -87,27 +102,20 @@ def checkFull(board):
     return 1
 
 
-def checkWinner(board):
+def checkWinner(board, color):
     h = 0
-    h += checkHorizontal(board)
-    h += checkVertical(board)
-    h += checkDiagonalX(board)
-    h += checkDiagonalY(board)
-
-    
-
-
-def checkState(board):
-    a = checkWinner(board)
-    b = checkFull(board)
-    if a == 3:
-        return 3
-    elif a == 4:
-        return 4
-    elif b == 1:
-        return 1
-    elif a == 0 or b == 0:
-        return 0
+    h += checkHorizontal(board, color)
+    h += checkVertical(board, color)
+    h += checkDiagonalX(board, color)
+    h += checkDiagonalY(board, color)
+    return h
 
 
-print(checkState(stateSpace2))
+def checkState(board, color1, color2):
+    a = checkWinner(board, color1)
+    b = checkWinner(board, color2)
+    heuristic = a - b
+    return b
+
+
+print(checkState(stateSpace2, "R", "B"))
