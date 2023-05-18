@@ -1,4 +1,5 @@
 from algorithms import MiniMax
+from algorithms import AlphaBeta
 
 import time
 
@@ -44,7 +45,7 @@ def main(algo, level):
             move = MiniMax.miniMax(boardd, level, True)
         # here alpha beta
         else:
-            move = MiniMax.miniMax(boardd, level, True)
+            move = AlphaBeta.alphaBeta(boardd, level, True)
 
         print("move = ", move)
 
