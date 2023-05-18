@@ -1,71 +1,78 @@
 from tkinter import *
-
+from lab_code import game
 import customtkinter
 
 listAlgorithms = ["Min max", "Alpha Beta"]
+listLevel = ["Easy", "Medium", "Hard"]
 
+values = {
+    "Easy": 2,
+    "Medium": 4,
+    "Hard": 6,
+    "Min max": 1,
+    "Alpha Beta": 2
+}
 frame = Tk()
 
 
-def initScreen():
-    frame.title("Connect 4")
-    setScreenLocation()
-    frame['background'] = 'white'
-    addAlgorithmsMenu()
-    addLevelMenu()
-    frame.mainloop()
+class Gui:
+    def __init__(self):
+        self.algoOptions = StringVar
+        self.levelOptions = StringVar
+
+    def initScreen(self):
+        frame.title("Connect 4")
+        self.setScreenLocation()
+        frame['background'] = 'white'
+        self.addAlgorithmsMenu()
+        self.addLevelMenu()
+        self.addButton()
+        frame.mainloop()
+
+    def setScreenLocation(self):
+        window_height = 600
+        window_width = 600
+        # get the screen dimension
+        screen_width = frame.winfo_screenwidth()
+        screen_height = frame.winfo_screenheight()
+        # find the center point
+        center_x = int(screen_width / 2 - window_width / 2)
+        center_y = int(screen_height / 2 - window_height / 2)
+        frame.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
+
+    def addAlgorithmsMenu(self):
+        # add label and set location
+        label = Label(frame, text='Select Algorthm', width=15, background="white")
+        label.grid(row=1, column=2)
+
+        # add menu options
+        self.algoOptions = StringVar(frame)
+        self.algoOptions.set("Select one")  # default value
+
+        menu = OptionMenu(frame, self.algoOptions, *listAlgorithms)
+        menu.grid(row=1, column=3)
+
+    def addLevelMenu(self):
+        # add label and set location
+        label = Label(frame, text='Select Level', width=15, background="white")
+        label.grid(row=3, column=2)
+
+        # add menu options
+        self.levelOptions = StringVar(frame)
+        self.levelOptions.set("select one")  # d
+        # efault value
+
+        menu = OptionMenu(frame, self.levelOptions, *listLevel)
+        menu.grid(row=3, column=3)
+
+    def addButton(self):
+        label = Label(frame, text='Start game', width=15, background="white")
+        label.grid(row=4, column=2)
+        btn = Button(frame, text="ok", command=lambda: self.clickOnButton())
+        btn.grid(row=4, column=3)
 
 
-def moveWindow(event):
-    frame.geometry('+{0}+{1}'.format(event.x_root, event.y_root))
 
 
-def setScreenLocation():
-    window_height = 600
-    window_width = 600
-    # get the screen dimension
-    screen_width = frame.winfo_screenwidth()
-    screen_height = frame.winfo_screenheight()
-    # find the center point
-    center_x = int(screen_width / 2 - window_width / 2)
-    center_y = int(screen_height / 2 - window_height / 2)
-    frame.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
-
-
-def button_event():
-    print("button pressed")
-    frame.destroy()
-
-
-def addAlgorithmsMenu():
-    # add label and set location
-    label = Label(frame, text='Select Algorthm', width=15, background="white")
-    label.grid(row=1, column=2)
-
-    # add menu options
-    options = StringVar(frame)
-    options.set("Min max")  # default value
-
-    menu = OptionMenu(frame, options, listAlgorithms[0], listAlgorithms[1])
-    menu.grid(row=1, column=3)
-
-
-def addLevelMenu():
-    # add label and set location
-    label = Label(frame, text='Select Level', width=15, background="white")
-    label.grid(row=3, column=2)
-
-    # add menu options
-    options = StringVar(frame)
-    options.set("easy ")  # default value
-
-    menu = OptionMenu(frame, options, "easy", "meduim", "hard")
-    menu.grid(row=3, column=3)
-
-
-def addButton():
-    button = customtkinter.CTkButton(master=frame, text="Min max algorithm", command=button_event)
-    button.pack(padx=10, pady=50)
-
-
-initScreen()
+gui = Gui()
+gui.initScreen()
