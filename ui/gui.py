@@ -71,7 +71,12 @@ class Gui:
         btn = Button(frame, text="ok", command=lambda: self.clickOnButton())
         btn.grid(row=4, column=3)
 
-
+    def clickOnButton(self):
+        algo = values.get(self.algoOptions.get())
+        level = values.get(self.levelOptions.get())
+        print('test')
+        frame.destroy()
+        game.main(algo, level)
 
 
 gui = Gui()

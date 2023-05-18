@@ -1,12 +1,5 @@
-
-import time
-import random
-
-from lab_code.board import Board
-
 from algorithms import MiniMax
 
-from lab_code import board
 import time
 
 from lab_code.board import Board
@@ -17,29 +10,29 @@ from lab_code.board import Board
 
 
 def convertBoard(grid):
-    board = [['-' for i in range(7)] for j in range(6)]
+    board2 = [['-' for i in range(7)] for j in range(6)]
     for i in range(0, len(grid)):
         for j in range(0, len(grid[i])):
             if grid[i][j] == 0:
-                board[i][j] = '-'
+                board2[i][j] = '-'
             elif grid[i][j] == 1:
-                board[i][j] = 'R'
+                board2[i][j] = 'R'
             elif grid[i][j] == 2:
-                board[i][j] = 'B'
-    return board
+                board2[i][j] = 'B'
+    return board2
 
 
 def main(algo, level):
-    board = Board()
+    board1 = Board()
 
     time.sleep(4)
     game_end = False
     while not game_end:
-        (game_board, game_end) = board.get_game_grid()
+        (game_board, game_end) = board1.get_game_grid()
 
         # FOR DEBUG PURPOSES
         print("------------------------------")
-        board.print_grid(game_board)
+        board1.print_grid(game_board)
         print("------------------------------")
         # YOUR CODE GOES HERE
         boardd = convertBoard(game_board)
@@ -52,12 +45,10 @@ def main(algo, level):
 
         print("move = ", move)
 
-        board.select_column(move)
+        board1.select_column(move)
 
         time.sleep(2)
 
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     main(1, 3)
-
-
