@@ -27,24 +27,6 @@ stateSpace3 = \
         ["R", "B", "R", "B", "-", "-", "-"]
 
 
-def printBoard(board):
-    for x in range(6):
-        print("[", end=' ')
-        for y in range(7):
-            print(board[x][y], end=' ')
-        print("]")
-
-# Unused function
-def checkFull(board):
-    for x in range(6):
-        for y in range(7):
-            if board[x][y] == "-":
-                return 0
-    return 1
-
-
-
-
 def replace(currentScore, bestScore, playerX):
     if playerX:
         color = "R"
@@ -79,7 +61,7 @@ def alphaBetaHelper(board, depthLimit, playerZ):
         bestScore = math.inf
 
     bestMove = -1
-    children = getChildren(board, playerZ)
+    children = MiniMax.getChildren(board, playerZ)
     for child in children:
         move, childBoard = child
         current, trash = alphaBetaHelper(childBoard, depthLimit - 1, not playerZ)
@@ -87,40 +69,3 @@ def alphaBetaHelper(board, depthLimit, playerZ):
             bestScore = current
             bestMove = move
     return bestScore, bestMove
-
-
-def makeMove(num, boardMove, color):
-    for x in range(6):
-        if (boardMove[x][num] == "R" or boardMove[x][num] == "B") and x != 0 and boardMove[x - 1][num] == "-":
-            boardMove[x - 1][num] = color
-            return boardMove
-        if x == 5 and x != 0 and boardMove[x - 1][num] == "-":
-            boardMove[x][num] = color
-            return boardMove
-    return boardMove
-
-
-def isFullColumn(boardColumn, num):
-    for x in range(6):
-        if boardColumn[x][num] == "-":
-            return False
-    return True
-
-
-def getChildren(boardChildren, playerJ):
-    children = []
-    if playerJ:
-        color = "R"
-    else:
-        color = "B"
-    for i in range(7):
-        if not isFullColumn(deepcopy(boardChildren), i):
-            childK = makeMove(i, deepcopy(boardChildren), color)
-            children.append((i, childK))
-    return children
-
-
-def printChildren(children):
-    for i in range(7):
-        j, k = children[i]
-        printBoard(k)
