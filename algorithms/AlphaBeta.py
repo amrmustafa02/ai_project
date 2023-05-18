@@ -1,5 +1,6 @@
 import math
 from copy import deepcopy
+from algorithms import MiniMax
 
 stateSpace1 = \
     ["-", "-", "-", "-", "-", "-", "-"], \
@@ -112,18 +113,9 @@ def checkFull(board):
     return 1
 
 
-def heuristicHelper(board, color):
-    h = 0
-    h += checkHorizontal(board, color)
-    h += checkVertical(board, color)
-    h += checkDiagonalX(board, color)
-    h += checkDiagonalY(board, color)
-    return h
-
-
 def heuristic(board, color1, color2):
-    a = heuristicHelper(board, color1)
-    b = heuristicHelper(board, color2)
+    a = MiniMax.heuristicHelper(board, color1)
+    b = MiniMax.heuristicHelper(board, color2)
     totalHeuristic = a - b
     return totalHeuristic
 
@@ -207,4 +199,3 @@ def printChildren(children):
     for i in range(7):
         j, k = children[i]
         printBoard(k)
-        print()
