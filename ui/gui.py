@@ -1,6 +1,5 @@
 from tkinter import *
 from lab_code import game
-import customtkinter
 
 listAlgorithms = ["Min max", "Alpha Beta"]
 listLevel = ["Easy", "Medium", "Hard"]
