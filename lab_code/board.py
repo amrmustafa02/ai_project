@@ -2,10 +2,10 @@ from PIL import ImageGrab
 import pyautogui
 
 # YOU MAY NEED TO CHANGE THESE VALUES BASED ON YOUR SCREEN SIZE
-LEFT = 570
-TOP = 200
-RIGHT = 1350
-BOTTOM = 875
+LEFT = 580
+TOP = 210
+RIGHT = 1330
+BOTTOM = 850
 
 EMPTY = 0
 RED = 1
@@ -13,7 +13,7 @@ BLUE = 2
 
 
 class Board:
-    def __init__(self) -> None:
+    def _init_(self) -> None:
         self.board = [[EMPTY for i in range(7)] for j in range(6)]
 
     def print_grid(self, grid):
@@ -43,8 +43,8 @@ class Board:
         cordArr = []
         for i in range(0, 7):
             for j in range(0, 6):
-                x = startCord[0] + i * 115
-                y = startCord[1] + j * 112
+                x = startCord[0] + i * 114
+                y = startCord[1] + j * 107
                 cordArr.append((x, y))
         return cordArr
 
@@ -89,6 +89,6 @@ class Board:
 
     def select_column(self, column):
         pyautogui.click(
-            self._get_grid_cordinates()[column][0] + LEFT,
-            self._get_grid_cordinates()[column][1] + TOP,
+            self._get_grid_cordinates()[column][1] + LEFT,
+            self._get_grid_cordinates()[column][0] + TOP,
         )
