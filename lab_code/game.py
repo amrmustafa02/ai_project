@@ -1,12 +1,15 @@
-from board import Board
+
 import time
 import random
+
+from lab_code.board import Board
+
 
 # GAME LINK
 # http://kevinshannon.com/connect4/
 
 
-def main():
+def main(algorithm, level):
     board = Board()
 
     time.sleep(2)
@@ -27,5 +30,4 @@ def main():
         time.sleep(2)
 
 
-if __name__ == "__main__":
-    main()
+
