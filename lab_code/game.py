@@ -24,11 +24,14 @@ def convertBoard(grid):
 
 def main(algo, level):
     board1 = Board()
-
+    print("test1")
     time.sleep(4)
     game_end = False
     while not game_end:
+        print("test2")
+
         (game_board, game_end) = board1.get_game_grid()
+        print("test3")
 
         # FOR DEBUG PURPOSES
         print("------------------------------")
@@ -50,5 +53,4 @@ def main(algo, level):
         time.sleep(2)
 
 
-if __name__ == '__main__':
-    main(1, 3)
+# main(1, 4)

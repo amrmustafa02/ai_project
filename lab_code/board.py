@@ -14,9 +14,6 @@ BLUE = 2
 
 class Board:
     def __init__(self):
-        self.board = None
-
-    def _init_(self) -> None:
         self.board = [[EMPTY for i in range(7)] for j in range(6)]
 
     def print_grid(self, grid):
