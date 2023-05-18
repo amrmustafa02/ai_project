@@ -34,76 +34,6 @@ def printBoard(board):
             print(board[x][y], end=' ')
         print("]")
 
-
-def checkHorizontal(board, color):
-    h = 0
-    for x in range(6):
-        for y in range(7):
-            if y < 6:
-                if board[x][y] == color and board[x][y + 1] == color:
-                    h += 10
-            if y < 5:
-                if board[x][y] == color and board[x][y + 1] == color and board[x][y + 2] == color:
-                    h += 100
-            if y < 4:
-                if board[x][y] == color and board[x][y + 1] == color and board[x][y + 2] == color \
-                        and board[x][y + 3] == color:
-                    h += 10000
-    return h
-
-
-def checkVertical(board, color):
-    h = 0
-    for x in range(6):
-        for y in range(7):
-            if x < 5:
-                if board[x][y] == color and board[x + 1][y] == color:
-                    h += 10
-            if x < 4:
-                if board[x][y] == color and board[x + 1][y] == color and board[x + 2][y] == color:
-                    h += 100
-            if x < 3:
-                if board[x][y] == color and board[x + 1][y] == color and board[x + 2][y] == color \
-                        and board[x + 3][y] == color:
-                    h += 10000
-    return h
-
-
-def checkDiagonalX(board, color):
-    h = 0
-    for x in range(6):
-        for y in range(7):
-            if x < 5 and y < 6:
-                if board[x][y] == color and board[x + 1][y + 1] == color:
-                    h += 10
-            if x < 4 and y < 5:
-                if board[x][y] == color and board[x + 1][y + 1] == color and board[x + 2][y + 2] == color:
-                    h += 100
-            if x < 3 and y < 4:
-                if board[x][y] == color and board[x + 1][y + 1] == color and board[x + 2][y + 2] == color and \
-                        board[x + 3][y + 3] == color:
-                    h += 10000
-    return h
-
-
-def checkDiagonalY(board, color):
-    h = 0
-    for x in range(6):
-        for y in range(6, 0, -1):
-            if x < 5 and y > 0:
-                if board[x][y] == color and board[x + 1][y - 1] == color:
-                    h += 10
-            if x < 4 and y > 1:
-                if board[x][y] == color and board[x + 1][y - 1] == color and board[x + 2][y - 2] == color:
-                    h += 100
-
-            if x < 3 and y > 2:
-                if board[x][y] == color and board[x + 1][y - 1] == color and board[x + 2][y - 2] == color and \
-                        board[x + 3][y - 3] == color:
-                    h += 10000
-    return h
-
-
 # Unused function
 def checkFull(board):
     for x in range(6):
@@ -113,11 +43,6 @@ def checkFull(board):
     return 1
 
 
-def heuristic(board, color1, color2):
-    a = MiniMax.heuristicHelper(board, color1)
-    b = MiniMax.heuristicHelper(board, color2)
-    totalHeuristic = a - b
-    return totalHeuristic
 
 
 def replace(currentScore, bestScore, playerX):
@@ -145,7 +70,7 @@ def alphaBeta(board, depthLimit, playerY):
 
 def alphaBetaHelper(board, depthLimit, playerZ):
     if depthLimit == 0:
-        return heuristic(board, "R", "B"), -1
+        return MiniMax.heuristic(board, "R", "B"), -1
 
     if playerZ:
         bestScore = -math.inf
