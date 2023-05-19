@@ -7,7 +7,7 @@ listLevel = ["Easy", "Medium", "Hard"]
 values = {
     "Easy": 2,
     "Medium": 4,
-    "Hard": 6,
+    "Hard": 7,
     "Min max": 1,
     "Alpha Beta": 2
 }

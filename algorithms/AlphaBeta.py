@@ -48,7 +48,7 @@ def alphaBetaHelper(board, depthLimit, playerZ, alpha, beta):
     children = MiniMax.getChildren(board, playerZ)
     for child in children:
         move, childBoard = child
-        current, trash = alphaBetaHelper(childBoard, depthLimit - 1, not playerZ,alpha, beta)
+        current, trash = alphaBetaHelper(childBoard, depthLimit - 1, not playerZ, alpha, beta)
         if MiniMax.replace(current, bestScore, playerZ):
             bestScore = current
             bestMove = move

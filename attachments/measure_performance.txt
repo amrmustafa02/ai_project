@@ -1,0 +1,7 @@
+in depth = 7
+       algorithm       number expanded
+         min max    | 262,143
+         alpha beta | can not measure because we can not know when the algorithm break
+
+but in general
+alpha beta is versy fast from min max
